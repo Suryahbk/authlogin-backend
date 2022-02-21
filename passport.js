@@ -1,0 +1,62 @@
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const GithubStrategy = require("passport-github2").Strategy;
+const FacebookStrategy = require("passport-facebook").Strategy;
+const passport = require("passport");
+
+const GOOGLE_CLIENT_ID = "185221592695-s1009gigdp6cas6ooccncsl8ccj5hmvn.apps.googleusercontent.com";
+const GOOGLE_CLIENT_SECRET = "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";
+
+GITHUB_CLIENT_ID = "7377b844ddcc65f8b793";
+GITHUB_CLIENT_SECRET = "f344f87bfe8211baa24e2920c761422e5eb18e5b";
+
+FACEBOOK_APP_ID = "302156381949229";
+FACEBOOK_APP_SECRET = "4f80aeb26a2ecb21b1fd3b7ea93d1121";
+
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET,
+      callbackURL: "/auth/google/callback",
+    },
+    function (accessToken, refreshToken, profile, done) {
+      done(null, profile);
+    }
+  )
+);
+
+passport.use(
+  new GithubStrategy(
+    {
+      clientID: GITHUB_CLIENT_ID,
+      clientSecret: GITHUB_CLIENT_SECRET,
+      callbackURL: "/auth/github/callback",
+    },
+    function (accessToken, refreshToken, profile, done) {
+      done(null, profile);
+    }
+  )
+);
+
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: FACEBOOK_APP_ID,
+      clientSecret: FACEBOOK_APP_SECRET,
+      callbackURL: "/auth/facebook/callback",
+    },
+    function (accessToken, refreshToken, profile, done) {
+      done(null, profile);
+    }
+  )
+);
+
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
