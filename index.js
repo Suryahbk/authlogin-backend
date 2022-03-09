@@ -11,6 +11,10 @@ app.use(
   cookieSession({ name: "session", keys: ["surya"], maxAge: 24 * 60 * 60 * 100 })
 );
 
+app.get('/',(req,res) => {
+  res.send("Back is running")
+});
+
 app.use(passport.initialize());
 app.use(passport.session());
 
